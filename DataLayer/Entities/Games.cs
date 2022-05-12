@@ -4,9 +4,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 
-namespace DataLayer.Entities
+namespace DataLayer
 {
-    class Games
+    public class Games
     {
         [Key]
         [Column("id")]

@@ -8,6 +8,8 @@ namespace DataLayer
     {
         public DbSet<User> User { get; set; }
         public DbSet<Friends> Friends{ get; set; }
+        public DbSet<Library> Library { get; set; }
+        public DbSet<Games> Games { get; set; }
 
         public EFDBContext(DbContextOptions<EFDBContext> options):base(options)
         {
