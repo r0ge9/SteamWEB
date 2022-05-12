@@ -11,7 +11,7 @@ namespace DataLayer
         {
             if(!context.User.Any())
             {
-                context.User.Add(new User())
+                //context.User.Add(new User())
             }
         }
     }
