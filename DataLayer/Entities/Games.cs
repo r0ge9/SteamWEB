@@ -13,7 +13,11 @@ namespace DataLayer
         public int Id { get; set; }
         public String Name { get; set; }
         public String Descriprion { get; set; }
-        public double Price { get; set; }
+        public double OldPrice { get; set; }
         public String UrlPhoto { get; set; }
+        public String UrlGame { get; set; }
+        public int Discount { get; set; }
+        public String Date { get; set; }
+        public double NewPrice { get; set; }
     }
 }

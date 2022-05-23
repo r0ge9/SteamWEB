@@ -40,14 +40,26 @@ namespace DataLayer.Migrations
                         .HasColumnName("id")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("Date")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Descriprion")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Discount")
+                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<double>("Price")
+                    b.Property<double>("NewPrice")
                         .HasColumnType("float");
+
+                    b.Property<double>("OldPrice")
+                        .HasColumnType("float");
+
+                    b.Property<string>("UrlGame")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UrlPhoto")
                         .HasColumnType("nvarchar(max)");
@@ -83,6 +95,9 @@ namespace DataLayer.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Password")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Photo")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");

@@ -14,5 +14,7 @@ namespace DataLayer
         public String Login { get; set; }
         public String Password { get; set; }
         public double Balance { get; set; }
+        public String Photo { get; set; }
+
     }
 }

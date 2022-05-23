@@ -27,7 +27,7 @@ namespace Steam
         {
             var connection = Configuration.GetConnectionString("DefaultConnection");
             services.AddDbContext<EFDBContext>(options => options.UseSqlServer(connection, x => x.MigrationsAssembly("DataLayer")));
-            services.AddControllersWithViews();
+            services.AddControllersWithViews().SetCompatibilityVersion(Microsoft.AspNetCore.Mvc.CompatibilityVersion.Version_3_0).AddSessionStateTempDataProvider();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -48,7 +48,7 @@ namespace Steam
 
             app.UseRouting();
 
-            app.UseAuthorization();
+            app.UseAuthorization(); 
 
             app.UseEndpoints(endpoints =>
             {

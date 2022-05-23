@@ -26,8 +26,12 @@ namespace DataLayer.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Descriprion = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Price = table.Column<double>(type: "float", nullable: false),
-                    UrlPhoto = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    OldPrice = table.Column<double>(type: "float", nullable: false),
+                    UrlPhoto = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UrlGame = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Discount = table.Column<int>(type: "int", nullable: false),
+                    Date = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NewPrice = table.Column<double>(type: "float", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -53,7 +57,8 @@ namespace DataLayer.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Login = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Password = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Balance = table.Column<double>(type: "float", nullable: false)
+                    Balance = table.Column<double>(type: "float", nullable: false),
+                    Photo = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {

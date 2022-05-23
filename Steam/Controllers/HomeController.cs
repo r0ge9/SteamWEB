@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using DataLayer;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Steam.Models;
 using System;
@@ -11,16 +12,20 @@ namespace Steam.Controllers
 {
     public class HomeController : Controller
     {
+        private EFDBContext _context;
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, EFDBContext context)
         {
             _logger = logger;
+            _context = context;
         }
 
         public IActionResult Index()
         {
-            return View();
+            List<Games> games = _context.Games.ToList();
+
+            return View(games);
         }
 
         public IActionResult Privacy()
