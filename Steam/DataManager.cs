@@ -1,9 +1,9 @@
-﻿using DataLayer.Repos.Abstract;
+﻿using Steam.Repos.Abstract;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace DataLayer
+namespace Steam
 {
     public class DataManager
     {

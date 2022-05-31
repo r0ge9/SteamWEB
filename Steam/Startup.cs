@@ -1,9 +1,10 @@
-using DataLayer;
-using DataLayer.Repos.Abstract;
-using DataLayer.Repos.EF;
+
+using Steam.Repos.Abstract;
+using Steam.Repos.EF;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -34,8 +35,16 @@ namespace Steam
 
 
             var connection = Configuration.GetConnectionString("DefaultConnection");
-            services.AddDbContext<EFDBContext>(options => options.UseSqlServer(connection, x => x.MigrationsAssembly("DataLayer")));
-            
+            services.AddDbContext<EFDBContext>(options => options.UseSqlServer(connection, x => x.MigrationsAssembly("Steam")));
+
+            services.AddIdentity<User, IdentityRole>(x =>
+             {
+                 x.Password.RequiredLength = 6;
+                 x.Password.RequireNonAlphanumeric = false;
+                 x.Password.RequireLowercase = false;
+                 x.Password.RequireUppercase = false;
+                 x.Password.RequireDigit = true;
+             }).AddEntityFrameworkStores<EFDBContext>().AddDefaultTokenProviders();
 
             services.ConfigureApplicationCookie(options =>
             {
@@ -54,7 +63,7 @@ namespace Steam
 
             services.AddControllersWithViews(x=>
             {
-                x.Conventions.Add(new AdminAuthorization("Admin", "AdminArea"));
+                x.Conventions.Add(new AdminAreaAuthorization("Admin", "AdminArea"));
             }).SetCompatibilityVersion(Microsoft.AspNetCore.Mvc.CompatibilityVersion.Version_3_0).AddSessionStateTempDataProvider();
         }
 
@@ -78,16 +87,12 @@ namespace Steam
 
             app.UseCookiePolicy();
             app.UseAuthentication();
-            app.UseAuthorization(); 
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
-                endpoints.MapControllerRoute(
-                    name: "admin",
-                    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapControllerRoute("admin", "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }

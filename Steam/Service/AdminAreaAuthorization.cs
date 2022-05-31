@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 
 namespace Steam.Service
 {
-    public class AdminAuthorization:IControllerModelConvention
+    public class AdminAreaAuthorization:IControllerModelConvention
     {
         private readonly string policy;
         private readonly string area;
 
-        public AdminAuthorization(string area,string policy)
+        public AdminAreaAuthorization(string area,string policy)
         {
             this.area = area;
             this.policy = policy;
@@ -21,10 +21,10 @@ namespace Steam.Service
 
         public void Apply(ControllerModel controller)
         {
-            if(controller.Attributes.Any(a=>
-            a is AreaAttribute&&(a as AreaAttribute).RouteValue.Equals(area,StringComparison.OrdinalIgnoreCase))
-            ||controller.RouteValues.Any(r=>
-                r.Key.Equals("area",StringComparison.OrdinalIgnoreCase)&&r.Value.Equals(area,StringComparison.OrdinalIgnoreCase)))
+            if (controller.Attributes.Any(a =>
+                    a is AreaAttribute && (a as AreaAttribute).RouteValue.Equals(area, StringComparison.OrdinalIgnoreCase))
+                || controller.RouteValues.Any(r =>
+                    r.Key.Equals("area", StringComparison.OrdinalIgnoreCase) && r.Value.Equals(area, StringComparison.OrdinalIgnoreCase)))
             {
                 controller.Filters.Add(new AuthorizeFilter(policy));
             }

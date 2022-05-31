@@ -1,10 +1,10 @@
-﻿using DataLayer.Repos.Abstract;
+﻿using Steam.Repos.Abstract;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace DataLayer.Repos.EF
+namespace Steam.Repos.EF
 {
     public class EFGameRepos:IGameRepos
     {

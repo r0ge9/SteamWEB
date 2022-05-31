@@ -1,10 +1,10 @@
-﻿using DataLayer.Repos.Abstract;
+﻿using Steam.Repos.Abstract;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace DataLayer.Repos.EF
+namespace Steam.Repos.EF
 {
     public class EFUserRepos:IUserRepos
     {
@@ -17,7 +17,7 @@ namespace DataLayer.Repos.EF
         {
             return context.User;
         }
-        public User GetUserById(int id)
+        public User GetUserById(string id)
         {
             return context.User.FirstOrDefault(x => x.Id == id);
         }
@@ -29,7 +29,7 @@ namespace DataLayer.Repos.EF
                 context.Entry(user).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
             context.SaveChanges();
         }
-        public void DeleteUser(int id)
+        public void DeleteUser(string id)
         {
             context.User.Remove(new User() { Id = id });
             context.SaveChanges();

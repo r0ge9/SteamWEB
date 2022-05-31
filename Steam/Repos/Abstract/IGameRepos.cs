@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace DataLayer.Repos.Abstract
+namespace Steam.Repos.Abstract
 {
     public interface IGameRepos
     {

@@ -5,15 +5,15 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
-namespace DataLayer
+namespace Steam
 {
     [Keyless]
     public class Friends
     {
         [ForeignKey(nameof(User))]
-        public int User1Id{ get; set; }
+        public string User1Id{ get; set; }
         [ForeignKey(nameof(User))]
-        public int User2Id { get; set; }
+        public string User2Id { get; set; }
         public int State { get; set; }
     }
 }

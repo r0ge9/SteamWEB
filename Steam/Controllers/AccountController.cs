@@ -12,9 +12,9 @@ namespace Steam.Controllers
     [Authorize]
     public class AccountController:Controller
     {
-        private readonly UserManager<IdentityUser> userManager;
-        private readonly SignInManager<IdentityUser> signInManager;
-        public AccountController(UserManager<IdentityUser>userMgr,SignInManager<IdentityUser>signinMgr)
+        private readonly UserManager<User> userManager;
+        private readonly SignInManager<User> signInManager;
+        public AccountController(UserManager<User>userMgr,SignInManager<User>signinMgr)
         {
             userManager = userMgr;
             signInManager = signinMgr;
@@ -28,21 +28,21 @@ namespace Steam.Controllers
         }
         [HttpPost]
         [AllowAnonymous]
-        public async Task<IActionResult> Login(LoginViewModel model,String returnUrl)
+        public async Task<IActionResult> Login(LoginViewModel model, string returnUrl)
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
-                IdentityUser user = await userManager.FindByNameAsync(model.Username);
-                if(user!=null)
+                User user = await userManager.FindByNameAsync(model.Username);
+                if (user != null)
                 {
                     await signInManager.SignOutAsync();
                     Microsoft.AspNetCore.Identity.SignInResult result = await signInManager.PasswordSignInAsync(user, model.Password, model.RememberMe, false);
-                    if(result.Succeeded)
+                    if (result.Succeeded)
                     {
                         return Redirect(returnUrl ?? "/");
                     }
                 }
-                ModelState.AddModelError(nameof(LoginViewModel.Username), "Неверный логин или-(и) пароль");
+                ModelState.AddModelError(nameof(LoginViewModel.Username), "Неверный логин или пароль");
             }
             return View(model);
         }

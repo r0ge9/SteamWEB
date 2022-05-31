@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace DataLayer.Repos.Abstract
+namespace Steam.Repos.Abstract
 {
     public interface IUserRepos
     {
         IQueryable<User> GetUser();
-        User GetUserById(int id);
+        User GetUserById(string id);
         void SaveUser(User user);
-        void DeleteUser(int id);
+        void DeleteUser(string id);
     }
 }
