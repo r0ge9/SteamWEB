@@ -1,0 +1,49 @@
+﻿@{ 
+    Layout = "_Layout";
+}
+@model Steam.Models.LoginViewModel
+    <!DOCTYPE html>
+    <html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="~/css/logStyle.css">
+        <title>Steam</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Akshar:wght@300&family=Koulen&display=swap" rel="stylesheet">
+      
+    </head>
+
+    <body>
+        <main>
+            <div class="Container">
+                <div class="AuthBlock">
+                    <div class="AuthForm">
+                        <form asp-area="" asp-controller="Account" asp-action="Login" method="post" asp-route-returnUrl="@ViewBag.returnUrl">
+                            <div asp-validation-summary="All">
+                                <h1>ВОЙТИ</h1>
+                                <label for="loginField" class="logLabel">Имя аккаунта Steam</label>
+                                <input type="text" class="loginField" asp-for="Username">
+                                <span asp-validation-for="Username"></span>
+                                <label for="passwordField" class="logLabel">Пароль</label>
+                                <input type="text" class="passwordField" asp-for="Password">
+                                <span asp-validation-for="Password"></span>
+                                <div class="checkBox">
+                                    <input type="checkbox" class="check" asp-for="RememberMe">
+                                    <span asp-validation-for="RememberMe"></span>
+                                    <p class="logLabel">Запомнить меня</p>
+                                </div>
+                                <button class="Enter">ВОЙТИ</button>
+                                <a href="" class="forgotPass">Забыли пароль?</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </body>
+</html>
+
