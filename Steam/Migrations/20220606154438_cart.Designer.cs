@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Steam;
 
 namespace Steam.Migrations
 {
     [DbContext(typeof(EFDBContext))]
-    partial class EFDBContextModelSnapshot : ModelSnapshot
+    [Migration("20220606154438_cart")]
+    partial class cart
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -49,7 +51,7 @@ namespace Steam.Migrations
                         new
                         {
                             Id = "96a7c7be-0830-4ea9-91ce-67844677462c",
-                            ConcurrencyStamp = "234c8d82-5b58-4a00-883b-d62bce92e864",
+                            ConcurrencyStamp = "6f5143ff-e484-4feb-b815-496f2dead945",
                             Name = "admin"
                         });
                 });
@@ -227,29 +229,6 @@ namespace Steam.Migrations
                     b.ToTable("Library");
                 });
 
-            modelBuilder.Entity("Steam.Models.GamesCartItem", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("GameId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("GamesCartId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<double>("Price")
-                        .HasColumnType("float");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("GameId");
-
-                    b.ToTable("GamesCartItem");
-                });
-
             modelBuilder.Entity("Steam.User", b =>
                 {
                     b.Property<string>("Id")
@@ -329,10 +308,10 @@ namespace Steam.Migrations
                             Id = "d96e88d9-2215-48f7-b437-5d70d5e5b6cd",
                             AccessFailedCount = 0,
                             Balance = 0.0,
-                            ConcurrencyStamp = "e74889c1-26ce-4d71-80ec-d66d223d98fe",
+                            ConcurrencyStamp = "c72ccc96-6028-4bcc-bd52-3680ec32e574",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAEAACcQAAAAEDnLPdahPEvPdhZkfW+vhC+uPiDO62UCUjAA7kKZB+3FZa0N/aiqqKVIgSYd5mUs5w==",
+                            PasswordHash = "AQAAAAEAACcQAAAAELwndwBleZ1alSVDdWTBc3ibKkHF8mehVTHVraIzhEucM1pm66q0DhUz/j869JSCCQ==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
@@ -389,15 +368,6 @@ namespace Steam.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("Steam.Models.GamesCartItem", b =>
-                {
-                    b.HasOne("Steam.Games", "Game")
-                        .WithMany()
-                        .HasForeignKey("GameId");
-
-                    b.Navigation("Game");
                 });
 #pragma warning restore 612, 618
         }

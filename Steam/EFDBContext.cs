@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
+using Steam.Models;
 using System;
 
 namespace Steam
@@ -13,6 +14,7 @@ namespace Steam
         public DbSet<Friends> Friends{ get; set; }
         public DbSet<Library> Library { get; set; }
         public DbSet<Games> Games { get; set; }
+        public DbSet<GamesCartItem> GamesCartItem { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

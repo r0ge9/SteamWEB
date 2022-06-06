@@ -14,6 +14,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
+using Steam.Models;
 
 namespace Steam
 {
@@ -32,7 +34,8 @@ namespace Steam
             services.AddTransient<IUserRepos, EFUserRepos>();
             services.AddTransient<IGameRepos, EFGameRepos>();
             services.AddTransient<DataManager>();
-
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddScoped(x => Cart.GetCart(x));
 
             var connection = Configuration.GetConnectionString("DefaultConnection");
             services.AddDbContext<EFDBContext>(options => options.UseSqlServer(connection, x => x.MigrationsAssembly("Steam")));
@@ -65,8 +68,12 @@ namespace Steam
             {
                 x.Conventions.Add(new AdminAreaAuthorization("Admin", "AdminArea"));
             }).SetCompatibilityVersion(Microsoft.AspNetCore.Mvc.CompatibilityVersion.Version_3_0).AddSessionStateTempDataProvider();
+
+            services.AddMemoryCache();
+            services.AddSession();
         }
 
+        
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
@@ -82,7 +89,7 @@ namespace Steam
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
+            app.UseSession();
             app.UseRouting();
 
             app.UseCookiePolicy();

@@ -9,7 +9,7 @@ namespace Steam
     {
         public static void InitData(EFDBContext context)
         {
-            if(!context.User.Any())
+            if (!context.User.Any())
             {
                 //context.User.Add(new User())
             }
