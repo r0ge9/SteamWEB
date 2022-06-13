@@ -6,16 +6,15 @@ using System.Threading.Tasks;
 
 namespace Steam.Models
 {
-    public class LoginViewModel
+    public class RegViewModel
     {
         [Required]
         public String Username { get; set; }
-
         [Required]
-        [UIHint("password")]
         public String Password { get; set; }
         [Required]
-        [Display(Name ="Запомнить меня?")]
-        public bool RememberMe { get; set; }
+        public String RepeatPassword { get; set; }
+        [Required]
+        public bool Agreement { get; set; }
     }
 }

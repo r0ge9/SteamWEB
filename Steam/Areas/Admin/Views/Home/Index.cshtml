@@ -1,49 +1,520 @@
-﻿@{ 
-    Layout = "_Layout";
-}
-@model Steam.Models.LoginViewModel
-    <!DOCTYPE html>
-    <html lang="en">
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
 
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="~/css/logStyle.css">
-        <title>Steam</title>
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Akshar:wght@300&family=Koulen&display=swap" rel="stylesheet">
-      
-    </head>
+    .Container {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
 
-    <body>
-        <main>
-            <div class="Container">
-                <div class="AuthBlock">
-                    <div class="AuthForm">
-                        <form asp-area="" asp-controller="Account" asp-action="Login" method="post" asp-route-returnUrl="@ViewBag.returnUrl">
-                            <div asp-validation-summary="All">
-                                <h1>ВОЙТИ</h1>
-                                <label for="loginField" class="logLabel">Имя аккаунта Steam</label>
-                                <input type="text" class="loginField" asp-for="Username">
-                                <span asp-validation-for="Username"></span>
-                                <label for="passwordField" class="logLabel">Пароль</label>
-                                <input type="text" class="passwordField" asp-for="Password">
-                                <span asp-validation-for="Password"></span>
-                                <div class="checkBox">
-                                    <input type="checkbox" class="check" asp-for="RememberMe">
-                                    <span asp-validation-for="RememberMe"></span>
-                                    <p class="logLabel">Запомнить меня</p>
-                                </div>
-                                <button class="Enter">ВОЙТИ</button>
-                                <a href="" class="forgotPass">Забыли пароль?</a>
-                            </div>
-                        </form>
-                    </div>
+    header {
+        background: #171a21;
+        padding-bottom: 10px;
+    }
+
+    .Authorization {
+        text-align: right;
+        font-family: 'Akshar', sans-serif;
+        margin-right: 20px;
+    }
+
+        .Authorization a {
+            color: rgb(159, 154, 154);
+            text-decoration: none;
+        }
+
+            .Authorization a:hover {
+                color: white;
+            }
+
+            .Authorization a:first-child {
+                border-right: solid 1px grey;
+                padding-right: 5px;
+            }
+
+    nav img {
+        width: 176px;
+        aspect-ratio: auto 176 / 44;
+        height: 44px;
+    }
+
+    nav {
+        display: flex;
+        align-items: center;
+        font-family: 'Akshar', sans-serif;
+        font-weight: 900;
+    }
+
+        nav a {
+            padding: 0 20px;
+            color: rgb(159, 154, 154);
+            text-decoration: none;
+        }
+
+            nav a:hover {
+                color: white;
+            }
+
+    body {
+        background: url(https://store.cloudflare.steamstatic.com/public/images/v6/colored_body_top.png?v=2) center / cover no-repeat;
+    }
+
+    .TitleName {
+        margin-top: 30px;
+        color: white;
+    }
+
+    .TopName {
+        font-weight: 900;
+        margin-bottom: 20px;
+    }
+
+    .MainGame {
+        display: flex;
+        height: 353px;
+        width: 100%;
+        box-shadow: 3px 3px 3px black,-3px -3px 3px black;
+    }
+
+    .MGInfo {
+        padding-left: 20px;
+        border: solid 0.1px gray;
+        border-left: none;
+        position: relative;
+        background: url( https://store.akamai.steamstatic.com/public/images/v6/home/background_maincap_2.jpg) center / cover no-repeat;
+    }
+
+    .MGName {
+        font-size: 30px;
+        margin-bottom: 5px;
+        font-weight: 700;
+    }
+
+    .MGDescription {
+        font-size: 20px;
+    }
+
+    .AllPrice {
+        display: flex;
+        position: absolute;
+        left: 20px;
+        bottom: 5px;
+        align-items: center;
+    }
+
+    .Discount {
+        background-color: green;
+        padding: 3px 5px;
+        color: rgb(63, 222, 35);
+    }
+
+    .OldPrice {
+        font-size: 14px;
+        text-decoration: line-through;
+        color: rgb(49, 144, 175);
+        padding-left: 5px;
+    }
+
+    .NewPrice {
+        color: rgb(64, 188, 230);
+        padding-left: 5px;
+    }
+
+    .SpecialLabel {
+        color: white;
+        font-weight: 900;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
+    .TopDescription {
+        background: url(https://store.akamai.steamstatic.com/public/images/v6/home/background_spotlight.jpg);
+        position: relative;
+        z-index: 10;
+        height: 100px;
+        width: 100%;
+    }
+
+    .GameCards {
+        display: flex;
+        justify-content: space-around;
+    }
+
+    .GameCard {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        height: 350px;
+        width: 306px;
+    }
+
+        .GameCard img {
+            position: absolute;
+            z-index: -1;
+        }
+
+    .SailLabel {
+        color: white;
+        font-weight: 500;
+        margin-top: 20px;
+        margin-bottom: 10px;
+        margin-left: 30px;
+    }
+
+    .EndingTime {
+        color: rgb(135, 179, 240);
+        padding-left: 25px;
+        margin-bottom: 40px;
+    }
+
+    .Sort {
+        width: 70%;
+    }
+
+    .Store {
+        display: flex;
+        padding-top: 50px;
+    }
+
+    .Bar {
+        display: flex;
+        justify-content: space-between;
+        padding-right: 70px;
+        background: rgba( 0, 0, 0, 0.4 );
+        padding: 6px;
+        margin-bottom: 20px;
+    }
+
+    .SortList {
+        display: flex;
+        align-items: center;
+    }
+
+    .SearchBar {
+        background-color: rgba( 103, 193, 245, 0.2 );
+        border: 1px solid #000;
+        border-radius: 3px;
+        box-shadow: 1px 1px 0px rgb(103 193 245 / 15%);
+        width: 300px;
+        padding: 5px;
+        color: white;
+    }
+
+    .SearchBut {
+        background-color: rgba( 103, 193, 245, 0.2 );
+        font-size: 12px;
+        line-height: 20px;
+        height: 27px;
+        padding: 0 15px;
+        border-radius: 7px;
+        color: #67c1f5;
+        border: none;
+        transition: .3s;
+    }
+
+        .SearchBut:active {
+            transform: scale(0.8);
+        }
+
+        .SearchBut:hover {
+            background-color: #2187c3;
+            cursor: pointer;
+            color: white;
+        }
+
+    .SortList p {
+        color: #4c6c8c;
+        margin-right: 15px;
+    }
+
+    .ListOfSort {
+        background: rgba( 103, 193, 245, 0.1 );
+        color: #67c1f5;
+        border: solid 5px rgba( 103, 193, 245, 0.1 );
+    }
+
+    .List {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .Row {
+        display: flex;
+        background: rgba( 0, 0, 0, 0.2 );
+        justify-content: space-between;
+        align-items: center;
+        border-radius: 5px;
+        margin-bottom: 10px;
+    }
+
+    .Cart {
+        width: 40px;
+        height: 40px;
+        background-color: rgb(47, 198, 47);
+        color: white;
+        border: none;
+        border-radius: 10%;
+        transition: .3s;
+        opacity: 0.8;
+    }
+
+        .Cart:active {
+            transform: scale(0.8);
+        }
+
+        .Cart:hover {
+            background-color: #106719;
+            cursor: pointer;
+            color: white;
+        }
+
+    .Description {
+        color: white;
+        display: flex;
+        justify-content: space-between;
+        width: 40%;
+    }
+
+    .Date {
+        color: gray;
+    }
+
+    .Filters {
+        flex-direction: column;
+        display: flex;
+        margin-left: 30px;
+    }
+
+    .Prices {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .TBLowPrice, .TBHighPrice {
+        width: 45%;
+        background-color: rgba( 103, 193, 245, 0.2 );
+        border: 1px solid #000;
+        border-radius: 3px;
+        box-shadow: 1px 1px 0px rgb(103 193 245 / 15%);
+        color: white;
+        height: 25px;
+        margin-bottom: 15px;
+    }
+
+    .Label {
+        color: white;
+        margin-bottom: 10px;
+    }
+
+    .Genres {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .GenresList {
+        display: flex;
+    }
+
+    .CBGenre {
+        margin-right: 10px;
+    }
+</style>
+@model List<Steam.Games>
+<p style="color: red; font-size: 40px; align-content: center;">АДМИН</p>
+<div class="TitleName">
+    <p class="TopName">ТОП ПРОДАЖ</p>
+    <div class="MainGame">
+        <img src="https://cdn-ext.fanatical.com/production/product/1280x720/5469ceb4-9d4d-49f1-9ff0-97cde333909f.jpeg"
+             alt="" />
+        <div class="MGInfo">
+            <p class="MGName">ELDEN RING Deluxe Edition</p>
+            <p class="MGDescription">
+                НОВЫЙ ФЭНТЕЗИЙНЫЙ РОЛЕВОЙ БОЕВИК. Восстань, погасшая душа! Междуземье ждёт своего повелителя. Пусть благодать приведёт тебя к Кольцу Элден.
+            </p>
+            <div class="AllPrice">
+                <p class="Discount">-10%</p>
+                <div>
+                    <p class="OldPrice">44.99$</p>
+                    <p class="NewPrice">39.99$</p>
                 </div>
             </div>
-        </main>
-    </body>
-</html>
+        </div>
+    </div>
+</div>
+<div class="TopGames">
+    <p class="SpecialLabel">СПЕЦИАЛЬНЫЕ ПРЕДЛОЖЕНИЯ</p>
+    <div class="GameCards">
+
+        <div class="GameCard">
+            <img src="https://cdn.cloudflare.steamstatic.com/steam/spotlights/cd45ed8e3a865e99e9a0040d/spotlight_image_english.jpg?t=1652226734"
+                 alt="" href="https://store.steampowered.com/app/915810/Midnight_Ghost_Hunt/" />
+
+            <div class="TopDescription">
+                <p class="SailLabel">АКЦИЯ ПОСРЕДИ НЕДЕЛИ</p>
+                <p class="EndingTime">Заканчивается 25 мая в 20:00.</p>
+                <div class="AllPrice">
+                    <p class="Discount">-20%</p>
+                    <p class="OldPrice">10,49$</p>
+                    <p class="NewPrice">8,39$</p>
+                </div>
+            </div>
+        </div>
+        <div class="GameCard">
+            <img src="https://cdn.cloudflare.steamstatic.com/steam/spotlights/ad7b9814888c3cb3ada803bf/spotlight_image_russian.jpg?t=1652811351"
+                 alt="" href="https://store.steampowered.com/sale/CerebralPuzzleShowcase" />
+            <div class="TopDescription">
+                <p class="SailLabel">АКЦИЯ ПОСРЕДИ НЕДЕЛИ</p>
+                <p class="EndingTime">Заканчивается 25 мая в 20:00.</p>
+                <div class="AllPrice">
+                    <p class="Discount">-75%</p>
+                    <p class="OldPrice">19,99$</p>
+                    <p class="NewPrice">4,99$</p>
+                </div>
+            </div>
+        </div>
+        <div class="GameCard">
+            <img src="https://cdn.akamai.steamstatic.com/steam/spotlights/25e30762ad407b1a0408fc78/spotlight_image_english.jpg?t=1652393616"
+                 alt="" href="https://store.steampowered.com/app/1850570/DEATH_STRANDING_DIRECTORS_CUT/" />
+            <div class="TopDescription">
+                <p class="SailLabel">АКЦИЯ ПОСРЕДИ НЕДЕЛИ</p>
+                <p class="EndingTime">Заканчивается 19 мая в 20:00.</p>
+                <div class="AllPrice">
+                    <p class="Discount">-20%</p>
+                    <p class="OldPrice">7.99$</p>
+                    <p class="NewPrice">6.99$</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div class="Store">
+
+    <div class="Sort">
+        <div class="Bar">
+            <div class="Search">
+                <input class="SearchBar" type="text" placeholder="введите искомое слово">
+                <button class="SearchBut">Поиск</button>
+            </div>
+            <div class="SortList">
+                <p>Сортировать по</p>
+                <select class="ListOfSort">
+                    <option value="Date">дате выхода</option>
+                    <option value="Name">названию</option>
+                    <option value="LowPrice">убыванию цены</option>
+                    <option value="HighPrice">возрастанию цены</option>
+                </select>
+            </div>
+        </div>
+        <div class="List">
+            <a class="Cart" asp-area="Admin" asp-controller="Games" asp-action="Add">Изменить</a>
+            <div class="Row">
+                <img src="https://cdn.akamai.steamstatic.com/steam/apps/1253920/capsule_184x69.jpg?t=1652116054"
+                     alt="" />
+                <div class="Description">
+                    <p class="Name">Rogue Legacy 2</p>
+                    <p class="Date">17 мая. 2022</p>
+                </div>
+                <div>
+                    <p class="Discount">-10%</p>
+                </div>
+                <div>
+                    <p class="OldPrice">9.99$</p>
+                    <p class="NewPrice">8.99$</p>
+                </div>
+                <button class="Cart"><i class="fa-solid fa-cart-shopping"></i></button>
+                <div class="Window">
+                    <p class="Name"></p>
+                    <img src="" alt="">
+                    <p class="Description"></p>
+                </div>
+            </div>
+            @foreach (var item in Model)
+            {
+                @if (item.Discount != 0)
+                {
+                    <div class="Row">
+                        <img src="@item.UrlPhoto"
+                             alt="">
+                        <div class="Description">
+                            <p class="Name">@item.Name</p>
+                            <p class="Date">@item.Date</p>
+                        </div>
+                        <div>
+                            <p class="Discount">-@item.Discount%</p>
+                        </div>
+                        <div>
+                            <p class="OldPrice">@item.OldPrice$</p>
+                            <p class="NewPrice">@item.NewPrice$</p>
+                        </div>
+                        <form id="form-@item.Id" asp-area="Admin" asp-controller="Games" asp-action="Delete" method="post">
+                            <input type="hidden" name="id" value="@item.Id" />
+                            <button class="Cart" action="" onclick="document.getElementById('form-@item.Id').submit();">Удалить</button>
+                        </form>
+                        <a class="Cart" asp-area="Admin" asp-controller="Games" asp-action="Edit" asp-route-id="@item.Id">Изменить</a>
+                        <div class="Window">
+                            <p class="Name"></p>
+                            <img src="" alt="">
+                            <p class="Description"></p>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <div class="Row">
+                        <img src="@item.UrlPhoto"
+                             alt="">
+                        <div class="Description">
+                            <p class="Name">@item.Name</p>
+                            <p class="Date">@item.Date</p>
+
+                            @*<div>
+                            <p class="Discount">@item.Discount</p>
+                        </div>*@
+                            @*<div>
+                        <p class="OldPrice">@item.OldPrice</p>*@
+                            <p class="NewPrice">@item.NewPrice$</p>
+                        </div>
+                        <form id="form-@item.Id" asp-area="Admin" asp-controller="Games" asp-action="Delete" method="post">
+                            <input type="hidden" name="id" value="@item.Id" />
+                            <button class="Cart" action="">Удалить</button>
+                        </form>
+                        <a class="Cart" asp-area="Admin" asp-controller="Games" asp-action="Edit" asp-route-id="@item.Id">Изменить</a>
+                        <div class="Window">
+                            <p class="Name"></p>
+                            <img src="" alt="">
+                            <p class="Description"></p>
+                        </div>
+                    </div>
+
+                }
+            }
+
+        </div>
+    </div>
+    <div class="Filters">
+        <p class="Label">Цена</p>
+        <div class="Prices">
+            <input class="TBLowPrice" type="text" placeholder="от">
+            <input class="TBHighPrice" type="text" placeholder="до">
+        </div>
+        <div>
+            <div class="Genres">
+                <p class="Label">Метки</p>
+                <div class="GenresList">
+                    <input class="CBGenre" type="checkbox">
+                    <p class="Label">Шутер</p>
+                </div>
+                <div class="GenresList">
+                    <input class="CBGenre" type="checkbox">
+                    <p class="Label">Шутер</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 

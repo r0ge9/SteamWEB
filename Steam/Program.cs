@@ -25,7 +25,7 @@ namespace Steam
                 var context = services.GetRequiredService<EFDBContext>();
                 SampleData.InitData(context);
             }
-            host.RunAsync();
+            host.Run();
 
         }
         public static IHostBuilder CreateHostBuilder(string[] args) =>

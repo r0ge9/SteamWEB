@@ -100,7 +100,9 @@ namespace Steam
             {
                 endpoints.MapControllerRoute("admin", "{area:exists}/{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
-                
+                endpoints.MapControllerRoute("auth", "{controller=Account}/{action=Login}/{id?}");
+                endpoints.MapControllerRoute("reg", "{controller=Account}/{action=Reg}/{id?}");
+
             });
         }
     }

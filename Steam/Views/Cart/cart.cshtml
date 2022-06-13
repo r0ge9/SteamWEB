@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>Корзина</title>
+  <style>
+      .cart__title {
+          padding-top: 50px;
+          color: #fff;
+          font-size: 30px;
+      }
+
+      .cart__games {
+          padding-top: 50px;
+          width: 69%;
+      }
+
+      .cart__delete {
+          height: 35px;
+          width: 55px;
+          border: none;
+          border-radius: 5px;
+          background-color: #179b24;
+          transition: .3s;
+          color: #fff;
+      }
+
+          .cart__delete:hover {
+              background-color: #106719;
+          }
+
+
+
+
+
+      /* Пометка */
+      .main_buts {
+          padding: 20px 15px;
+          background: rgba( 0, 0, 0, 0.2 );
+          width: 69%;
+      }
+      /* Пометка */
+
+
+
+
+      .all-price {
+          font-size: 24px;
+          color: #fff;
+          margin-bottom: 20px;
+      }
+
+      .cart-buttons {
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+          padding: 0 30px;
+      }
+
+          .cart-buttons button {
+              background-color: #179b24;
+              width: 130px;
+              height: 45px;
+              border-radius: 7px;
+              border: none;
+              transition: .3s;
+              cursor: pointer;
+              color: #fff;
+          }
+
+              .cart-buttons button:hover {
+                  background-color: #106719;
+              }
+  </style>
+</head>
+
+<body>
+  <div class="Container">
+    <main>
+      <h2 class="cart__title">Ваша Корзина</h2>
+      <div class="cart__games">
+        <div class="Row">
+          <img src="https://cdn.akamai.steamstatic.com/steam/apps/1253920/capsule_184x69.jpg?t=1652116054" alt="">
+          <div class="Description">
+            <div class="hoverWin">
+              <p class="hoverName">Rogue Legacy 2</p>
+              <p class="hoverDescription">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nisi unde aperiam
+                quas at ex, praesentium vero deserunt, suscipit inventore voluptas veniam! Voluptatum tempore dolore
+                eos? Cumque iste officia quo modi!</p>
+              <p class="hoverGenre">Shooter</p>
+            </div>
+            <p class="Name">Rogue Legacy 2</p>
+            <p class="Date">17 мая. 2022</p>
+          </div>
+          <div>
+            <p class="Discount">-10%</p>
+          </div>
+          <div>
+            <p class="OldPrice">9.99$</p>
+            <p class="NewPrice">8.99$</p>
+          </div>
+          <button class="cart__delete">Удалить</button>
+          <div class="Window">
+            <p class="Name"></p>
+            <img src="" alt="">
+            <p class="Description"></p>
+          </div>
+        </div>
+        <div class="Row">
+          <img src="https://cdn.akamai.steamstatic.com/steam/apps/1253920/capsule_184x69.jpg?t=1652116054" alt="">
+          <div class="Description">
+            <div class="hoverWin">
+              <p class="hoverName">Rogue Legacy 2</p>
+              <p class="hoverDescription">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nisi unde aperiam
+                quas at ex, praesentium vero deserunt, suscipit inventore voluptas veniam! Voluptatum tempore dolore
+                eos? Cumque iste officia quo modi!</p>
+              <p class="hoverGenre">Shooter</p>
+            </div>
+            <p class="Name">Rogue Legacy 2</p>
+            <p class="Date">17 мая. 2022</p>
+          </div>
+          <div>
+            <p class="Discount">-10%</p>
+          </div>
+          <div>
+            <p class="OldPrice">9.99$</p>
+            <p class="NewPrice">8.99$</p>
+          </div>
+          <button class="cart__delete">Удалить</button>
+          <div class="Window">
+            <p class="Name"></p>
+            <img src="" alt="">
+            <p class="Description"></p>
+          </div>
+        </div>
+      </div>
+    </main>
+    <!-- ПОМЕТКА -->
+    <div class="main_buts">
+      <p class="all-price">Общая сумма: 228TL</p>
+      <div class="cart-buttons">
+      <button class="delete-all">удалить все товары</button>
+      <button class="buy">Купить для себя</button>
+    </div>
+    </div>
+    <!-- ПОМЕТКА -->
+  </div>
+</body>
+
+</html>

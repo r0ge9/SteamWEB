@@ -1,0 +1,163 @@
+﻿
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Steam</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Akshar:wght@300&family=Koulen&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/32b0cb9c06.js" crossorigin="anonymous"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .Container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .AuthBlock {
+            align-items: center;
+            display: flex;
+            margin: 100px auto;
+            background-size: 100%;
+        }
+
+        .AuthForm h1 {
+            margin: 20px auto;
+        }
+
+        .AuthForm {
+            margin: 0 auto;
+        }
+
+        form {
+            padding: 50px;
+            display: flex;
+            flex-direction: column;
+            width: 300px;
+            padding: 30px 0;
+        }
+
+        .logLabel {
+            color: #363636;
+        }
+
+        .checkBox {
+            display: flex;
+        }
+
+        .check {
+            margin-right: 20px;
+        }
+
+        .Enter {
+            width: 150px;
+            margin: 10px auto;
+            background: linear-gradient( to right, #47bfff 5%, #1a44c2 60%);
+            border: none;
+            border-radius: 5px;
+            height: 30px;
+            cursor: pointer;
+            transition: 0.8s;
+        }
+
+            .Enter:hover {
+                background-color: #9bdcff;
+                transform: scale(1.2);
+            }
+
+        .loginField {
+            max-width: 300px;
+            background: #32353C;
+            border-radius: 3px;
+            color: #E9E9E9;
+            padding: 8px 6px;
+            display: block;
+            box-shadow: none;
+            width: 100%;
+            transition: border ease-in-out .5s;
+            border: 1px solid #26282D;
+            outline: none;
+            font-family: "Motiva Sans", Sans-serif;
+            font-weight: normal;
+        }
+
+        .passwordField {
+            max-width: 300px;
+            background: #32353C;
+            border-radius: 3px;
+            color: #E9E9E9;
+            padding: 8px 6px;
+            display: block;
+            box-shadow: none;
+            width: 100%;
+            transition: border ease-in-out .5s;
+            border: 1px solid #26282D;
+            outline: none;
+            font-family: "Motiva Sans", Sans-serif;
+            font-weight: normal;
+        }
+
+        .forgotPass {
+            text-decoration: none;
+            color: white;
+            margin: 0 auto;
+        }
+
+        html {
+            height: 100%;
+        }
+
+        h1 {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    @model Games
+    <main>
+        <div class="Container">
+            <div class="AuthBlock">
+                <div class="AuthForm">
+                    <form asp-area="Admin" asp-controller="Games" asp-action="Edit" method="post" enctype="multipart/form-data">
+                        <h1>Редактировать игру</h1>
+                        <label for="loginField" class="logLabel">Название игры</label>
+                        <input type="text" class="loginField" asp-for="Name">
+                        <span asp-validation-for="Name"></span>
+                        <label for="passwordField" class="logLabel">Описание игры</label>
+                        <textarea class="loginField" asp-for="Descriprion"></textarea>
+                        <span asp-validation-for="Descriprion"></span>
+                        <label for="passwordField" class="logLabel">Дата выхода</label>
+                        <input type="text" class="passwordField" asp-for="Date">
+                        <span asp-validation-for="Date"></span>
+                        <label for="passwordField" class="logLabel">Скидка</label>
+                        <input type="text" class="passwordField" asp-for="Discount">
+                        <span asp-validation-for="Discount"></span>
+                        <label for="passwordField" class="logLabel">Старая цена</label>
+                        <input type="text" class="passwordField" asp-for="OldPrice">
+                        <span asp-validation-for="OldPrice"></span>
+                        <label for="passwordField" class="logLabel">Новая цена</label>
+                        <input type="text" class="passwordField" asp-for="NewPrice">
+                        <span asp-validation-for="NewPrice"></span>
+                        <label for="passwordField" class="logLabel">Ссылка на фото</label>
+                        <input type="text" class="passwordField" asp-for="UrlPhoto">
+                        <span asp-validation-for="UrlPhoto"></span>
+                        <button class="Enter" type="submit">Подтвердить</button>
+                        <button class="Enter">Отмена</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
